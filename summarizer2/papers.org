@@ -1,0 +1,13 @@
+* Beyond trending topics: Real world event identification on twitter
+  Ref: Becker, Hila, Mor Naaman, and Luis Gravano. "Beyond trending
+  topics: Real-world event identification on twitter." Proceedings of
+  the Fifth International AAAI Conference on Weblogs and Social Media
+  (ICWSM’11). 2011.
+
+  Clustering de tweets usando algoritmo online. Se mide la similitud
+  de un tweet con el centroide de cada cluster y se agrega al de
+  máxima similitud por sobre un threshold $\tau$. Luego se aplica un
+  clasificador sobre los cada cluster de acuerdo a ciertos
+  indicadores, para determinar si es o no un evento. 
+  
+  Ver: social features

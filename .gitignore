@@ -1,0 +1,13 @@
+*.pdf
+*.ps
+*.pyc
+*.txt
+*.sql
+*.zip
+*.bz2
+*.history
+
+cluto-2.1.2
+cc6909
+
+.DS_Store
