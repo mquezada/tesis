@@ -31,10 +31,10 @@ def write_file(summary_name, day, counter):
             print >>f, word + '\t' + str(freq)
 
 
-def collect_stats(init, from_what, process_file, summary_name, end=lambda: None):
+def collect_stats(init, from_what, process_file, summary_name, end=lambda: None, other_path=''):
     init(counters)
 
-    read(from_what, process_file)
+    read(from_what, process_file, other_path)
 
     for day in range(7):
         write_file(summary_name, day, counters[day])

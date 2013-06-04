@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import settings as s
 
-PATH = '/Users/mquezada/Tesis/Boston Dataset'
+PATH = s.DATASET
+
 entities = {
     'tweets': '/Tweets',
     'hashtags': '/E_Hashtags',
