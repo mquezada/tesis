@@ -4,12 +4,22 @@
 import unicodedata
 import re
 from nltk.corpus import stopwords
+from nltk.stem import SnowballStemmer
+
 
 english_sw = stopwords.words('english')
 spanish_sw = stopwords.words('spanish')
 
+stemmers = {
+    'en': SnowballStemmer('porter'),
+    'es': SnowballStemmer('spanish'),
+    'pt': SnowballStemmer('portuguese'),
+    'it': SnowballStemmer('italian'),
+    'fr': SnowballStemmer('french'),
+    'de': SnowballStemmer('german'),
+}
 
-tco_urls_pattern = re.compile("http:\/\/(.*?)/[a-zA-Z0-9]*")
+tco_urls_pattern = re.compile("(https?:\/\/.*?/[a-zA-Z0-9]*)")
 
 
 def is_stopword2(word):
@@ -28,18 +38,27 @@ def remove_diacritic(input):
         return ''
 
 
-def clean_and_tokenize(sentence):
+def clean_and_tokenize(sentence, stem_words=False, lang='en'):
     """
     - removes diacritics
     - removes urls
     - removes stopwords
     - removes punctuation
     - tokenizes sentence
+    - stems words
     """
     sentence = remove_diacritic(sentence)  # removes accents
     sentence = tco_urls_pattern.sub('', sentence)  # removes urls
     words = re.findall(r'\w+', sentence, flags=re.UNICODE | re.LOCALE)  # tokenize, removes punctuation
-    return [w for w in words if not len(w) < 3 and not is_stopword2(w)]  # filters short words and stop words
+    if stem_words:
+        loc_stem = lambda w: stem(w, lang=lang)
+    else:
+        loc_stem = lambda x: x
+    return [loc_stem(w.lower()) for w in words if not len(w) < 3 and not is_stopword2(w)]  # filters short words and stop words
+
+
+def stem(word, lang='en'):
+    return stemmers.get(lang, stemmers['en']).stem(word)
 
 
 def main():

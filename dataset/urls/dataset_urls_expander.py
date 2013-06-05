@@ -1,11 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-PATH = '/Users/mquezada/Tesis/dataset'
-import sys
-sys.path.append(PATH)
-
-import files
+from files import files
 import re
 import threading
 import Queue
